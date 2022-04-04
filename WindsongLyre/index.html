@@ -27,8 +27,14 @@
 				作者：RainNight0<br />
 				技术指导：陈独秀<br /><br />
 				Debug<br />
+				<div id="debug"></div>
 				<script type="text/javascript">
-					document.write("逻辑分辨率" + window.screen.width + "*" + window.screen.height);
+					debug();
+					function debug() {
+						document.getElementById("debug").innerHTML="逻辑分辨率" + window.screen.width + "*" + window.screen.height;
+						setTimeout('debug()', 500);
+					}
+					
 				</script>
 			</div>
 			<div class="dialog-footer">
