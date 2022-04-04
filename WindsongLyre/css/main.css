@@ -59,7 +59,7 @@ body {
 
 .lt { text-decoration: line-through; }
 
-/*顶部按钮栏*/
+
 #site-top {
 	top: 0;
 }
@@ -78,7 +78,7 @@ body {
 	display: inline-block;
 }
 
-/*琴键面板*/
+
 #pianoKeyPanel {
 	position: absolute;
 	bottom: 0px;

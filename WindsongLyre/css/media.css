@@ -57,7 +57,7 @@
 }
 
 /*中型移动设备屏幕(手机)*/
-@media screen and (max-width: 823px) and (min-width: 655px) {
+@media screen and (max-width: 896px) and (max-height: 414px) and (min-width: 655px) and (min-height: 310px) {
 	#pianoKeyPanel {
 		left: 50%;
 	}
@@ -116,13 +116,13 @@
 		margin-top: 11px;
 	}
 	.dialog-size {
-		width: 500px;
-		height: 45px;
+		width: 445px;
+		height: 41px;
 	}
 }
 
 /*大型移动设备屏幕(平板电脑)*/
-@media screen and (min-width: 824px) {
+@media screen and (min-width: 897px) {
 	#pianoKeyPanel {
 		left: 50%;
 	}
@@ -163,6 +163,10 @@
 	.line>div {
 		border-top: solid rgba(255, 255, 255, 0.5) 2px;
 		margin-top: 8px;
+	}
+	.dialog-size {
+		width: 600px;
+		height: 185px;
 	}
 }
 
