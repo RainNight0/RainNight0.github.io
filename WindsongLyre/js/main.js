@@ -62,17 +62,20 @@ var keyBoardCode = {
 	90: "z"
 }
 
-var audio = {};
+let audio = {};
+
+//放置Piano Key
 $(() => {
 	if (i = 1) {
 		for (let o = 0; o < 7; o++) {
 			$(".row-1").append(
 				`<div class="pianoKeyContainer">
-					<div id="key_${clickCode[i][o]}" onclick="sing(${i},${o});" class="pianoKey" style="background-image: url('images/${audioName[o]}.png');"></div>
+					<div id="key_${clickCode[i][o]}" onclick="sing(${i},${o});" class="pianoKey" style="background-image: url('images/piano_key/${audioName[o]}.png');"></div>
 					<div id="circle${clickCode[i][o]}" class="pianoKeyCircle"></div>
-				</div>`);
+				</div>`
+			);
 			audio[clickCode[i][o]] = new Audio();
-			audio[clickCode[i][o]].src = `audio/${clickCode[i][o]}.wav`;
+			audio[clickCode[i][o]].src = `audio/${clickCode[i][o]}.ogg`;
 		}
 	}
 });
@@ -81,11 +84,12 @@ $(() => {
 		for (let o = 0; o < 7; o++) {
 			$(".row-2").append(
 				`<div class="pianoKeyContainer">
-					<div id="key_${clickCode[i][o]}" onclick="sing(${i},${o});" class="pianoKey" style="background-image: url('images/${audioName[o]}.png');"></div>
+					<div id="key_${clickCode[i][o]}" onclick="sing(${i},${o});" class="pianoKey" style="background-image: url('images/piano_key/${audioName[o]}.png');"></div>
 					<div id="circle${clickCode[i][o]}" class="pianoKeyCircle"></div>
-				</div>`);
+				</div>`
+			);
 			audio[clickCode[i][o]] = new Audio();
-			audio[clickCode[i][o]].src = `audio/${clickCode[i][o]}.wav`;
+			audio[clickCode[i][o]].src = `audio/${clickCode[i][o]}.ogg`;
 		}
 	}
 });
@@ -94,34 +98,32 @@ $(() => {
 		for (let o = 0; o < 7; o++) {
 			$(".row-3").append(
 				`<div class="pianoKeyContainer">
-					<div id="key_${clickCode[i][o]}" onclick="sing(${i},${o});" class="pianoKey" style="background-image: url('images/${audioName[o]}.png');"></div>
+					<div id="key_${clickCode[i][o]}" onclick="sing(${i},${o});" class="pianoKey" style="background-image: url('images/piano_key/${audioName[o]}.png');"></div>
 					<div id="circle${clickCode[i][o]}" class="pianoKeyCircle"></div>
-				</div>`);
+				</div>`
+			);
 			audio[clickCode[i][o]] = new Audio();
-			audio[clickCode[i][o]].src = `audio/${clickCode[i][o]}.wav`;
+			audio[clickCode[i][o]].src = `audio/${clickCode[i][o]}.ogg`;
 		}
 	}
 });
 let keyAnimateArr = new Array();
-$(
-	() => {
-		for (let i in keyBoardCode) {
-			keyAnimateArr[keyBoardCode[i]] = {
-				bool: false
-			}
+$(() => {
+	for (let i in keyBoardCode) {
+		keyAnimateArr[keyBoardCode[i]] = {
+			bool: false
 		}
 	}
-);
+});
 function sing(i, o) {
 	playAudio(clickCode[i][o]);
 }
-$(document).keydown(
-	(event) => {
-		if (keyBoardCode[event.keyCode] != undefined) {
-			playAudio(keyBoardCode[event.keyCode]);
-		}
+$(document).keydown((event) => {
+	if (keyBoardCode[event.keyCode] != undefined) {
+		playAudio(keyBoardCode[event.keyCode]);
 	}
-)
+});
+//播放声音
 function playAudio(key) {
 	console.log(key);
 	if (key != "-") {
@@ -131,7 +133,7 @@ function playAudio(key) {
 		music.play();
 	}
 }
-
+//琴键动画
 function keyAnimate(key) {
 	if (!keyAnimateArr[key]["bool"]) {
 		keyAnimateArr[key]["bool"] = true;
@@ -172,6 +174,7 @@ function exitFullScreen(element) {
 }
 */
 
+//全屏按钮点击事件
 var $fullScreen = document.getElementById("FullScreen");
 if ($fullScreen) {
 	$fullScreen.addEventListener("click", function () {
@@ -190,6 +193,42 @@ if ($fullScreen) {
 		}
 	}, false);
 }
+//退出全屏按钮点击事件
+var $cancelFullScreen = document.getElementById("ExitFullScreen");
+if ($cancelFullScreen) {
+	$cancelFullScreen.addEventListener("click", function () {
+		if (document.exitFullscreen) {
+			document.exitFullscreen();
+		}
+		else if (document.msExitFullscreen) {
+			document.msExitFullscreen();
+		}
+		else if (document.mozCancelFullScreen) {
+			document.mozCancelFullScreen();
+		}
+		else if (document.webkitCancelFullScreen) {
+			document.webkitCancelFullScreen();
+		}
+	}, false);
+}
+//监听window是否全屏
+window.onresize = function() {
+	var isFull = !!(
+	document.fullscreenElement ||
+	document.msFullscreenElement ||
+	document.mozFullScreen ||
+	document.webkitIsFullScreen
+	);
+	if (isFull == false) {
+		$("#ExitFullScreen").css("display", "none");
+		$("#FullScreen").css("display", "");
+	} else {
+		$("#ExitFullScreen").css("display", "");
+		$("#FullScreen").css("display", "none");
+	}
+}
+
+
 /*
 var $cancelFullScreen = document.getElementsByClassName("ExitFullScreen");
 if ($cancelFullScreen) {
@@ -214,7 +253,8 @@ if ($cancelFullScreen) {
 }
 */
 
-var $openStatementWindow = document.getElementById("statement_botton");
+//声明 按钮点击事件
+/*var $openStatementWindow = document.getElementById("statement_botton");
 if ($openStatementWindow) {
 	$openStatementWindow.addEventListener("click", function () {
 		document.getElementById("statement_window_box").style.display = "block";
@@ -225,4 +265,17 @@ if ($openStatementWindow) {
 	$openStatementWindow.addEventListener("click", function () {
 		document.getElementById("statement_window_box").style.display = "none";
 	});
+}*/
+
+var eID_about_button = document.getElementById("about_botton");
+var eID_exit_about_window = document.getElementById("exit_about_window");
+if (eID_about_button) {
+	eID_about_button.addEventListener("click", open = () => {
+		document.getElementById("about_window_box").style.display = "block";
+	})
+}
+if (eID_exit_about_window) {
+	eID_exit_about_window.addEventListener("click", open = () => {
+		document.getElementById("about_window_box").style.display = "none";
+	})
 }
